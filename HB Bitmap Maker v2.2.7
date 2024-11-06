@@ -1,3 +1,5 @@
+#Requires AutoHotkey v2.0
+
 ;<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>;
 ;<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>|<<<(**)>>>;
 ;HB Bitmap Maker v2
@@ -6,7 +8,7 @@
 ;Written By: @Hellbent
 ;Special thank you to all those that have contributed to the creation of the GDI+ lib for AHK.
 ;Date Started: Aug 29th, 2024
-;Current version: v2.2.7
+;Current version: v2.2.8
 ;Last Edit: Oct(<>)NOV 2024
 ;Change log:                    *<<<---Note: I'm not very diligent with this, not every change gets logged*
 ;Added DrawRectangle element type (oct23rd,2024)
@@ -35,7 +37,8 @@
 ;Added a display window that shows save progress.
 ;Fixed issues with being able to mess up a save by making changes to the bitmap while it is being saved.
 ;Added B64ICON element type. Accepts a B64 string of up to 15000 chr.
-;
+;Fixed text offset
+;v2.2.8(Nov 6th, 2024)
 ;
 ;
 ;
@@ -4896,7 +4899,7 @@ class WriteElements {
         if( element.Note != "" )
             output .= ";" element.Note "`n`t"
         output .= This.Write%brushType%Code( element ) "`n`t"
-        output .= "options := `"s`" ( element.FontSize ) * scale `" c`" pBrush `" x`" ( element.Rect.X ) * scale `" y`" ( element.Rect.Y ) * scale `n`t" 
+        output .= "options := `"s`" ( element.FontSize ) * scale `" c`" pBrush `" x`" ( element.Rect.X + element.Offset ) * scale `" y`" ( element.Rect.Y + element.Offset ) * scale `n`t" 
         output .= "options .= ( ( element.Center ) ? ( `" Center`" ) : ( `"`" ) ) ( ( element.vCenter ) ? ( `" vCenter`" ) : ( `"`" ) ) ( ( element.Bold ) ? ( `" Bold`" ) : ( `"`" ) ) `n`t"
         output .= "options .= ( ( element.Italic ) ? ( `" Italic`" ) : ( `"`" ) ) ( ( element.Right ) ? ( `" Right`" ) : ( `"`" ) ) ( ( element.Strike ) ? ( `" Strikeout`" ) : ( `"`" ) ) `n`t"
         output .= "options .= ( ( element.Underline ) ? ( `" underline`" ) : ( `"`" ) ) ( ( element.NoWrap ) ? ( `" NoWrap`" ) : ( `"`" ) ) `n`t"
