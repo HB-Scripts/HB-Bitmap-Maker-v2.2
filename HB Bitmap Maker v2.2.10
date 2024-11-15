@@ -6816,7 +6816,7 @@ class RecordingPanel    {
         ;-----------------        
         This.Window.SetFont( "s" 10 " Bold " , "Segoe UI" )
         This.AddControl( "Text" , "cBlack x+m+5 yp+5 w50 hp-10 0x200  Background03B9BA " , "  Rate:")        
-        This.AddControl( "Edit" , "cWhite x+m yp w56 hp -E0x200 Center Background004A4A" , 0 , "PlaybackSpeedEdit" )
+        This.AddControl( "Edit" , "cWhite x+m yp w56 hp -E0x200 Center Background004A4A" , 30 , "PlaybackSpeedEdit" )
         This.Window.SetFont( "s" 8 " Bold " , "Segoe UI" )
         This.AddControl( "Text" , "cBlack x+m yp w30 hp 0x200 Center Background03B9BA " , "ms")
         This.AddControl( "Picture" , "xs+10 y+85 w30 h30 " , "hBitmap: " This.Carara2Function( This.CamElements , .1 ) , "CamPicture" , "Click" , This.CaptureFrame.Bind( This ) )
