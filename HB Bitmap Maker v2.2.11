@@ -306,12 +306,9 @@ class Main extends MainEvents {
         This.MainWindow.EventButtonElements := ExportEventsClass.EventsClassClipButton1Elements()
         This.AddControl( "Picture" , "x+m yp w" This.IconSize * 1.7 " h" This.IconSize " " , "hBitmap: " ExportEventsClass.EventsClassClipButton1Function( This.MainWindow.EventButtonElements , Scale := .1  ) , "EventClassButton" )
         This.Controls.EventClassButton.GetPos( &x , &y )
-        EventsClass.AddTrigger( ExportEventsClass.Trigger1Object( This.MainWindow , Vector( x / .1 , y / .1 ) , .1 ) )
+        EventsClass.AddTrigger( ExportEventsClass.Trigger1Object( This.MainWindow , Vector( ( x * ( A_ScreenDPI / 96 ) ) / .1 , ( y * ( A_ScreenDPI / 96 ) ) / .1 ) , .1 ) )
         ;*********************
 
-
-
-        
         This.AddControl( "Text" , "x+m yp w" This.IconSize * 1.6 " h" This.IconSize " Center 0x200 Background99ccff c000000" , "Vectors" ,, "Click" , This.ToggleVectorsPanel.Bind( This ) )
     }
     static AddControl( type := "Text" , options := "" , value := "" , name := "" , eventType := "" , eventBind := "" ){
