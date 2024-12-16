@@ -3180,7 +3180,7 @@ class ElementPanel {
 
         This.AddControl( "Edit" , "x+0 yp w30 hp Center -E0x200 Background008822 cffffff" , SubStr( This.Element.Color1 , 3 , 2 ), "Alpha1" , "Change" , This.SetAltAlpha1.Bind( This ) )
         This.AddControl( "Edit" , "x+0 yp w60 hp Center -E0x200 Background008822 cffffff" , SubStr( This.Element.Color1 , 5 ) , "Color1" , "Change" , This.SetAltColor1.Bind( This ) )
-        This.AddControl( "CheckBox" , "x+m yp w96 hp Right Background008822 cffffff " ( ( This.Element.DebugMode ) ? ( " Checked" ) : ( "" ) ) , "DebugMode" ,, "Click" , This.SetDebugMode.Bind( This ) )
+        This.AddControl( "CheckBox" , "x+m yp w110 hp Right Background008822 cffffff " ( ( This.Element.DebugMode ) ? ( " Checked" ) : ( "" ) ) , "DebugMode" ,, "Click" , This.SetDebugMode.Bind( This ) )
     
     }
     AddHeader(){
