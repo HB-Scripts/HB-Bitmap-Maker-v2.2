@@ -77,7 +77,7 @@
 ;Rewrote the wheelEvents class (new code removes 400 lines) (mar 2025)
 ;Rewrote the Elements class (from 350 to 110 lines)
 ;Rewrote the Element Panel class (from 1200 to 1000 lines)
-;
+;Fixed an issue with the text element panel wasn't being created (Mar 18th 2025)
 ;
 ;Notes/Resources:
 ;Requires a copy of GDIP_ALL for ahk v2: https://raw.githubusercontent.com/buliasz/AHKv2-Gdip/master/Gdip_All.ahk
@@ -2604,6 +2604,7 @@ class ElementPanel { ;rewritten Mar 11th 2025 (old: ~1200, new: ~1000) ;Still ca
         This.Window.SetFont( "s" 10 " Bold" , "Segoe UI" )
         This.AddControl( "Text" , "xm y+m w80 h23 0x200  Background33ff99 c000000" , "  Font Type" )
         This.Window.SetFont( "s" 9 " Bold" , "Segoe UI" )
+        
         choice := This.Element.FontType
         Loop( ElementPanel.FontTypesList.Length ){
             if(  choice = ElementPanel.FontTypesList[ A_Index ] ){
@@ -2611,24 +2612,30 @@ class ElementPanel { ;rewritten Mar 11th 2025 (old: ~1200, new: ~1000) ;Still ca
                 break
             }
         }
-        This.AddControl( "DDL" , "x+m yp w218 r22 -E0x200 Background008822 cFFFFFF Choose" choice , ElementPanel.FontTypesList ,, "Change" , This.ControlInput.Bind( This "FontType" ) )
+        
+        This.AddControl( "DDL" , "x+m yp w218 r22 -E0x200 Background008822 cFFFFFF Choose" choice , ElementPanel.FontTypesList ,, "Change" , This.ControlInput.Bind( This , "FontType" ) )
         This.Window.SetFont( "s" 10 " Bold" , "Segoe UI" )
+        
         This.AddControl( "Text" , "xm y+m w80 r1 0x200  Background33ff99 c000000" , "  Font Size" )
         This.Window.SetFont( "s" 9 " Bold" , "Segoe UI" )
         This.AddControl( "Edit" , "x+m yp w30 hp -E0x200  Background008822 cFFFFFF" , This.Element.FontSize , "FontSize" , "Change" , This.ControlInput.Bind( This , "FontSize" ) )
         This.Window.SetFont( "s" 10 " Bold" , "Segoe UI" )
         This.AddControl( "Text" , "x+m yp w80 r1 0x200  Background33ff99 c000000" , "  Offset" )
+        
         This.Window.SetFont( "s" 9 " Bold" , "Segoe UI" )
         This.AddControl( "Edit" , "x+m yp w30 hp -E0x200  Background008822 cFFFFFF" , This.Element.Offset , "Offset" , "Change" , This.ControlInput.Bind( This , "Offset" ) )
         This.Window.SetFont( "s" 10 " Bold" , "Segoe UI" )
         This.AddControl( "Checkbox" , "xm y+m w98 Right Background33ff99 c000000 " ( ( This.Element.Center = 1 ) ? ( " Checked" ) : ( " " ) ) , "Center" , "Center" , "Click" , This.ControlInput.Bind( This , "Center" ) )
-        This.AddControl( "Checkbox" , "x+m yp wp Right Background33ff99 c000000 " ( ( This.Element.vCenter = 1 ) ? ( " Checked" ) : ( " " ) ) , "vCenter" , "vCenter" , "Click" , This.ControlInput.Bind( This "vCenter" ) )
+        This.AddControl( "Checkbox" , "x+m yp wp Right Background33ff99 c000000 " ( ( This.Element.vCenter = 1 ) ? ( " Checked" ) : ( " " ) ) , "vCenter" , "vCenter" , "Click" , This.ControlInput.Bind( This , "vCenter" ) )
+        
         This.AddControl( "Checkbox" , "x+m yp wp Right Background33ff99 c000000 " ( ( This.Element.Bold = 1 ) ? ( " Checked" ) : ( " " ) ) , "Bold" , "Bold" , "Click" , This.ControlInput.Bind( This , "Bold" ) )
         This.AddControl( "Checkbox" , "xm y+m wp Right Background33ff99 c000000 " ( ( This.Element.Underline = 1 ) ? ( " Checked" ) : ( " " ) ) , "Underline" , "Underline" , "Click" , This.ControlInput.Bind( This , "Underline" ) )
         This.AddControl( "Checkbox" , "x+m yp wp Right Background33ff99 c000000 " ( ( This.Element.Strike = 1 ) ? ( " Checked" ) : ( " " ) ) , "Strike" , "Strike" , "Click" , This.ControlInput.Bind( This , "Strike" ) )
+        
         This.AddControl( "Checkbox" , "x+m yp wp Right Background33ff99 c000000 " ( ( This.Element.Right = 1 ) ? ( " Checked" ) : ( " " ) ) , "Right" , "Right" , "Click" , This.ControlInput.Bind( This , "Right" ) )
         This.AddControl( "Checkbox" , "xm y+m wp Right Background33ff99 c000000 " ( ( This.Element.NoWrap = 1 ) ? ( " Checked" ) : ( " " ) ) , "NoWrap" , "NoWrap" , "Click" , This.ControlInput.Bind( This , "NoWrap" ) )
         This.AddControl( "Checkbox" , "x+m yp wp Right Background33ff99 c000000 " ( ( This.Element.Italic = 1 ) ? ( " Checked" ) : ( " " ) ) , "Italic" , "Italic" , "Click" , This.ControlInput.Bind( This , "Italic" ) )
+        
         This.AddControl( "Checkbox" , "x+m yp wp Right Background33ff99 c000000 " ( ( This.Element.DebugMode = 1 ) ? ( " Checked" ) : ( " " ) ) , "DebugMode" , "DebugMode" , "Click" , This.ControlInput.Bind( This , "DebugMode" ) )
     }
     AddPieControls(){
